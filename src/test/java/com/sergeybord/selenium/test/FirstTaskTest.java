@@ -22,8 +22,6 @@ public class FirstTaskTest {
 
     @BeforeClass
     public void beforeTest() {
-        String chromeDriverPath = "\"C:\\\\Users\\\\sbordychevskiy\\\\IdeaProjects\\\\_libs\\\\chromedriver\\\\chromedriver.exe\"";
-        System.setProperty("webdriver.chrome.driver", chromeDriverPath);
         driver = new ChromeDriver();
     }
 
@@ -35,15 +33,10 @@ public class FirstTaskTest {
     }
 
     @Test
-         public void logoPresence(){
+
+    public void logoPresence(){
         driver.get("http://prestashop.qatestlab.com.ua/");
-        try {
-            /* check logo presence -> throw NoSuchElementException if logo absent */
-            WebElement searchElement = driver.findElement(By.id("header_logo"));
-        } catch (NoSuchElementException e){
-            /* fail test and write error message */
-            Assert.fail("!Logo is absent!");
-        }
+        if (driver.findElements(By.id("header_logo")).size() == 0) { Assert.fail("!Logo is absent!"); }
     }
 
     @Test
