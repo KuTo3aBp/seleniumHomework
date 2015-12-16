@@ -57,7 +57,7 @@ public class SecondTaskTest {
         TimeUnit.SECONDS.sleep(1);
         driver.navigate().refresh();
 
-        /* add to cart */
+        /* get item count in cart */
         String cartCount = driver.findElement(By.xpath(".//span[@class='ajax_cart_quantity']")).getText();
 
         /* if cart is empty */
