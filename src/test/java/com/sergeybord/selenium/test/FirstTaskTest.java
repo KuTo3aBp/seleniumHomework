@@ -1,21 +1,19 @@
 package com.sergeybord.selenium.test;
 
+
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import java.io.File;
 import java.util.List;
 
 public class FirstTaskTest {
-
 
 
     private WebDriver driver;
@@ -23,6 +21,9 @@ public class FirstTaskTest {
     @BeforeClass
     public void beforeTest() {
         driver = new ChromeDriver();
+
+        /* set browser size to prevent design change according to browser size */
+        driver.manage().window().setSize(new Dimension(800,600));
     }
 
     @AfterClass
@@ -33,22 +34,26 @@ public class FirstTaskTest {
     }
 
     @Test
-
     public void logoPresence(){
-        driver.get("http://prestashop.qatestlab.com.ua/");
-        if (driver.findElements(By.id("header_logo")).size() == 0) { Assert.fail("!Logo is absent!"); }
+        driver.get("http://prestashop.qatestlab.com.ua/en/");
+
+        /* if logo is absent -> fail test */
+        if (driver.findElements(By.id("header_logo")).size() == 0) {
+            Assert.fail("()Logo is absent");
+        }
     }
 
     @Test
-    public void featuredGoodsCount(){
-        driver.get("http://prestashop.qatestlab.com.ua/");
+    public void featuredItemsCount(){
+        driver.get("http://prestashop.qatestlab.com.ua/en/");
+
         /* fill goods List with li elements*/
-        List<WebElement> goods = driver.findElements(By.xpath(".//*[@id=\"homefeatured\"]/li"));
+        List<WebElement> items = driver.findElements(By.xpath(".//*[@id=\"homefeatured\"]/li"));
 
         /* check count of goods on page */
-        int goodsCount = 8;
-        if (goods.size() != goodsCount){
-            Assert.fail("!goodsCount must be " + goodsCount + ", NOT " + goods.size() + "!");
+        int itemsCount = 8;
+        if (items.size() != itemsCount){
+            Assert.fail("()itemsCount must be " + itemsCount + ", NOT " + items.size());
         }
     }
 }
