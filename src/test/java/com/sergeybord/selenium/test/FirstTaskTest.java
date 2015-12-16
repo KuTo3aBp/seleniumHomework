@@ -5,19 +5,25 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import java.io.File;
 import java.util.List;
 
 public class FirstTaskTest {
+
+
 
     private WebDriver driver;
 
     @BeforeClass
     public void beforeTest() {
+        String chromeDriverPath = "\"C:\\\\Users\\\\sbordychevskiy\\\\IdeaProjects\\\\_libs\\\\chromedriver\\\\chromedriver.exe\"";
+        System.setProperty("webdriver.chrome.driver", chromeDriverPath);
         driver = new ChromeDriver();
     }
 
